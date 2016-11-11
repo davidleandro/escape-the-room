@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fuja!!</title>
+
+
+    <style id="revelar"></style>
+    <style>
+    #room {
+      display: block;
+      width: 960px;
+      height: 600px;
+      margin: 10px auto;
+      background: url('bg_room.jpg') center center no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    #room div { display: block; }
+    .number, #pass, #check_pass, .item, #porta { position: absolute; }
+
+    .number {
+      display: block;
+      width: 90px;
+      height: 68px;
+      background: #CCC;
+      right: 10px;
+      text-align: center;
+      line-height: 68px;
+      font-size: 25px;
+      font-weight: bold;
+    }
+    #number_1 { top: 50px; }
+    #number_2 { top: 129px; }
+    #number_3 { top: 208px; }
+    #number_4 { top: 288px; }
+    #number_5 { top: 366px; }
+
+    .item, #porta {
+      /*opacity: 0.5;
+      background: #CCC;*/
+    }
+
+    #item_1 { left: 140px; top: 345px; height: 30px; width: 40px; }
+    #item_2 { left: 300px; top: 100px; height: 50px; width: 410px; }
+    #item_3 { left: 665px; top: 267px; height: 76px; width: 77px; }
+    #item_4 { left: 480px; top: 420px; height: 40px; width: 80px; }
+    #item_5 { left: 262px; top: 403px; height: 30px; width: 50px; }
+    #porta  { left: 405px; top: 270px; height: 115px; width: 110px; }
+
+    #pass {
+      left: 100px;
+      top: 25px;
+      width: 200px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 18px;
+    }
+
+    #check_pass {
+      display: block;
+      width: 68px;
+      height: 70px;
+      background: #efff00;
+      opacity: 0.3;
+      left: 20px;
+      top: 11px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    </style>
+
+  </head>
+
+  <body>
+    <div id="room">
+      <div class="number" id="number_1"></div>
+      <div class="number" id="number_2"></div>
+      <div class="number" id="number_3"></div>
+      <div class="number" id="number_4"></div>
+      <div class="number" id="number_5"></div>
+
+      <div id="porta" onclick="Verifica()"></div>
+
+      <div class="item" id="item_1" onclick="Revela(5)"></div>
+      <div class="item" id="item_2" onclick="Revela(9)"></div>
+      <div class="item" id="item_3" onclick="Revela(3)"></div>
+      <div class="item" id="item_4" onclick="Revela(2)"></div>
+      <div class="item" id="item_5" onclick="Revela(7)"></div>
+
+      <input type="number" id="pass" />
+      <div id="check_pass" onclick="Verifica()"></div>
+    </div>
+
+
+    <script type="text/javascript">
+
+    function Verifica() {
+      var number = (+ document.getElementById('pass').value ).toString(16)
+      if(number == "5c1b") {
+        alert("Muito bem! você está livre.");
+      } else {
+        alert("A porta está trancada.");
+      }
+    }
+
+    var itens = 0;
+    var revelados = [];
+    function Revela(numero) {
+      if(!isInArray(revelados, numero)) {
+        itens++;
+        revelados += numero;
+        document.getElementById("number_"+itens).innerHTML = numero;
+        RevelaDica(itens);
+      }
+    }
+
+    dicas = [
+      "Ordem dos números é crescente.",
+      "Panela velha é quem faz comida boa.",
+      "Papel no chão não! Limpa aí seu porcalhão.",
+      "Quer uma luz aí?",
+      "Em pequenas caixinhas guardam grandes segredos."
+    ];
+    function RevelaDica(numero) {
+      alert(dicas[numero-1]);
+    }
+
+    function isInArray(array, number) {
+      for (var i = 0; i < array.length; i++) {
+        if(array[i] == number) {
+          return true;
+        }
+      }
+    }
+    </script>
+  </body>
+</html>
